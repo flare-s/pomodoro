@@ -8,6 +8,14 @@ const timer = {
     longBreakInterval: 4
 }
 
+const updateClock = () => {
+    let {timeRemaining} = timer;
+    let minutes = `${timeRemaining.minutes}`.padStart(2, "0");
+    let seconds = `${timeRemaining.seconds}`.padStart(2, "0");
+
+    document.querySelector("#js-minutes").textContent = minutes;
+    document.querySelector("#js-seconds").textContent = seconds;
+}
 
 const switchMode = (mode) => {
     // Set the mode for the countdown
@@ -25,7 +33,8 @@ const switchMode = (mode) => {
     // Add the active class to the clicked button
     document.querySelector(`[data-mode="${mode}"]`).classList.add("active");
 
-    document.body.style.backgroundColor = `var(--${mode})`
+    document.body.style.backgroundColor = `var(--${mode})`;
+    updateClock();
 
 }
 

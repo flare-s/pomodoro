@@ -9,7 +9,23 @@ test("Clicking the short break button gives it the active class and remove the a
 
     //reset so the test does not affect the code
     previousButton.click();
-    console.log(timer);
+
+
+
+})
+
+
+test("Clicking the short break button change the countdown to the timer shortBreak property duration", () => {
+    let shortBreak = document.querySelector('[data-mode="shortBreak"]');
+    let previousButton = document.querySelector("[data-mode].active");
+    shortBreak.click();
+    
+    let expected = timer.shortBreak;
+    let actual = document.querySelector("#js-minutes");
+    assertEquals(expected, +actual.textContent);
+
+    //reset so the test does not affect the code
+    previousButton.click();
 
 
 
