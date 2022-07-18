@@ -12,13 +12,13 @@ html {
 }
 
 :root {
-  --pomodoro: hsl(223, 25%, 40%);
+  --workDuration: hsl(223, 25%, 40%);
   --shortBreak: hsl(48, 23%, 40%);
   --longBreak: hsl(105, 16%, 40%);
 }
 
 body {
-  background-color: var(--pomodoro);
+  background-color: var(--workDuration);
   transition: background-color 1s ease;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   user-select: none;
