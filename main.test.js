@@ -30,3 +30,21 @@ test("Clicking the short break button change the countdown to the timer shortBre
 
 
 })
+
+
+test("Clicking the start button start the setInterval method", () => {;
+    mainButton.click();
+    
+    let expected = true;
+    let actual = typeof timerInterval === "number";
+    assertEquals(expected, actual);
+
+    clearInterval(timerInterval);
+
+    mainButton.textContent = "start";
+    mainButton.dataset.action = "start";
+    mainButton.classList.remove("active");
+
+
+
+})
