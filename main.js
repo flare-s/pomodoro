@@ -52,9 +52,20 @@ function startTimer() {
         if (total <= 0) {
             // if the time is over clear the setInterval
             clearInterval(timerInterval);
+            timerInterval = null;
         }
 
     }, 1000);
+}
+
+
+// Pause the timer
+const stopTimer = () => {
+    clearInterval(timerInterval);
+    timerInterval = null;
+    mainButton.textContent = "start";
+    mainButton.dataset.action = "start";
+    mainButton.classList.remove("active");
 }
 
 // Format the minutes and seconds and show them in the UI
@@ -94,6 +105,8 @@ const handleMode = (e) => {
     if (!mode) return;
 
     switchMode(mode);
+    // Stop the countdown (If it's running) when switching between modes
+    stopTimer();
 }
 
 modeButtons.addEventListener("click", handleMode);
@@ -103,5 +116,7 @@ mainButton.addEventListener("click", (e) => {
 
     if (action === "start") {
         startTimer();
+    } else if(action === "stop") {
+        stopTimer();
     }
 })

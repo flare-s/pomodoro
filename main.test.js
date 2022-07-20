@@ -48,3 +48,14 @@ test("Clicking the start button start the setInterval method", () => {;
 
 
 })
+
+test("Clicking the pause button clear the setinterval that is running and pause the time", () => {;
+    mainButton.click();
+
+    mainButton.click();    
+
+    let expected = null;
+    let actual = timerInterval;
+    assertEquals(expected, actual);    
+
+})
