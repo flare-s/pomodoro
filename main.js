@@ -134,6 +134,9 @@ mainButton.addEventListener("click", (e) => {
   if (action === "start") {
     startTimer();
   } else if (action === "stop") {
+    if (timer.mode === "workDuration") {
+      timer.sessionsStarted--;
+    }
     stopTimer();
   }
 });
