@@ -7,6 +7,7 @@ const timer = {
   shortBreak: 5,
   longBreak: 15,
   longBreakInterval: 4,
+  mode: "workDuration",
   sessionsStarted: 0,
 };
 
@@ -125,6 +126,8 @@ const handleMode = (e) => {
   // Stop the countdown (If it's running) when switching between modes
   stopTimer();
 };
+
+document.addEventListener("DOMContentLoaded", () => switchMode(timer.mode));
 
 modeButtons.addEventListener("click", handleMode);
 
