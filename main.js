@@ -39,7 +39,6 @@ function startTimer() {
   const endTime = Date.parse(new Date()) + total * 1000;
   mainButton.textContent = "stop";
   mainButton.dataset.action = "stop";
-  mainButton.classList.add("active");
 
   // Everytime we start work increase the sessions started counter
   if (timer.mode === "workDuration") {
@@ -83,7 +82,6 @@ const stopTimer = () => {
   timerInterval = null;
   mainButton.textContent = "start";
   mainButton.dataset.action = "start";
-  mainButton.classList.remove("active");
 };
 
 // Format the minutes and seconds and show them in the UI
@@ -115,7 +113,7 @@ const switchMode = (mode) => {
   // Add the active class to the clicked button
   document.querySelector(`[data-mode="${mode}"]`).classList.add("active");
 
-  document.body.style.backgroundColor = `var(--${mode})`;
+  document.body.style.backgroundImage = `linear-gradient(145deg, var(--${mode}))`;
   updateClock();
 };
 
