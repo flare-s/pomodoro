@@ -16,7 +16,7 @@ test("Clicking the short break button change the countdown to the timer shortBre
   let previousButton = document.querySelector("[data-mode].active");
   shortBreak.click();
 
-  let expected = timer.shortBreak;
+  let expected = timer.shortBreak >= 1 ? timer.shortBreak : 0;
   let actual = document.querySelector("#js-minutes");
   assertEquals(expected, +actual.textContent);
 

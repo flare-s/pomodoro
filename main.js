@@ -3,9 +3,9 @@ const mainButton = document.querySelector("#js-btn");
 
 // Pomodoro default config
 const timer = {
-  workDuration: 1,
-  shortBreak: 5,
-  longBreak: 15,
+  workDuration: 0.1,
+  shortBreak: 0.1,
+  longBreak: 0.1,
   longBreakInterval: 4,
   mode: "workDuration",
   sessionsStarted: 0,
@@ -89,7 +89,9 @@ const stopTimer = () => {
 // Format the minutes and seconds and show them in the UI
 const updateClock = () => {
   let { timeRemaining } = timer;
-  let minutes = `${timeRemaining.minutes}`.padStart(2, "0");
+  let minutes = `${
+    timeRemaining.minutes >= 1 ? timeRemaining.minutes : 0
+  }`.padStart(2, "0");
   let seconds = `${timeRemaining.seconds}`.padStart(2, "0");
 
   document.querySelector("#js-minutes").textContent = minutes;
@@ -103,7 +105,7 @@ const switchMode = (mode) => {
   timer.timeRemaining = {
     total: timer[mode] * 60,
     minutes: timer[mode],
-    seconds: 0,
+    seconds: timer[mode] >= 1 ? 0 : timer[mode] * 60,
   };
 
   // Remove the active class from all the buttons
