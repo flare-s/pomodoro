@@ -123,8 +123,6 @@ const handleMode = (e) => {
   const { mode } = e.target.dataset;
   // If the clicked element doesn't have mode in their dataset return
   if (!mode) return;
-  let el = document.querySelector(`#${e.target.id}`);
-  console.log(el);
   handleIndicator(e.target);
 
   switchMode(mode);
