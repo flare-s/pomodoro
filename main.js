@@ -1,11 +1,11 @@
 const modeButtons = document.querySelector("#js-mode-buttons");
 const mainButton = document.querySelector("#js-btn");
-
+const indicator = document.querySelector(".indicator");
 // Pomodoro default config
 const timer = {
-  workDuration: 0.1,
-  shortBreak: 0.1,
-  longBreak: 0.1,
+  workDuration: 0.05,
+  shortBreak: 0.05,
+  longBreak: 0.05,
   longBreakInterval: 4,
   mode: "workDuration",
   sessionsStarted: 0,
@@ -111,7 +111,9 @@ const switchMode = (mode) => {
     .querySelectorAll("[data-mode]")
     .forEach((button) => button.classList.remove("active"));
   // Add the active class to the clicked button
-  document.querySelector(`[data-mode="${mode}"]`).classList.add("active");
+  let selectedMode = document.querySelector(`[data-mode="${mode}"]`);
+  selectedMode.classList.add("active");
+  handleIndicator(selectedMode);
 
   document.body.style.backgroundImage = `linear-gradient(145deg, var(--${mode}))`;
   updateClock();
@@ -121,13 +123,29 @@ const handleMode = (e) => {
   const { mode } = e.target.dataset;
   // If the clicked element doesn't have mode in their dataset return
   if (!mode) return;
+  let el = document.querySelector(`#${e.target.id}`);
+  console.log(el);
+  handleIndicator(e.target);
 
   switchMode(mode);
   // Stop the countdown (If it's running) when switching between modes
   stopTimer();
 };
 
+const handleIndicator = (element) => {
+  let elementSpecs = element.getBoundingClientRect();
+  indicator.style.top = `${elementSpecs.top}px`;
+  indicator.style.left = `${elementSpecs.left}px`;
+  indicator.style.width = `${elementSpecs.width}px`;
+  indicator.style.height = `${elementSpecs.height}px`;
+};
+
 document.addEventListener("DOMContentLoaded", () => switchMode(timer.mode));
+
+window.addEventListener("resize", () => {
+  let el = document.querySelector(`[data-mode="${timer.mode}"]`);
+  handleIndicator(el);
+});
 
 modeButtons.addEventListener("click", handleMode);
 
