@@ -1,6 +1,7 @@
 const modeButtons = document.querySelector("#js-mode-buttons");
 const mainButton = document.querySelector("#js-btn");
 const indicator = document.querySelector(".indicator");
+const pageTitle = document.querySelector("title");
 // Pomodoro default config
 const timer = {
   workDuration: 0.05,
@@ -20,11 +21,11 @@ function getTimeRemaining(endTime) {
   const difference = endTime - currentTime;
 
   // Convert MS to seconds
-  const total = Number.parseInt(difference / 1000, 10);
+  const total = parseInt(difference / 1000);
   // Convert total seconds to minutes
-  const minutes = Number.parseInt((total / 60) % 60, 10);
+  const minutes = parseInt((total / 60) % 60);
   // conver total seconds to seconds that are not a part of the minutes e.g 130 seconds will be 10 seconds
-  const seconds = Number.parseInt(total % 60, 10);
+  const seconds = parseInt(total % 60);
 
   return {
     total,
@@ -94,6 +95,7 @@ const updateClock = () => {
 
   document.querySelector("#js-minutes").textContent = minutes;
   document.querySelector("#js-seconds").textContent = seconds;
+  pageTitle.textContent = `${timer.mode} | ${minutes}:${seconds}`;
 };
 
 const switchMode = (mode) => {
