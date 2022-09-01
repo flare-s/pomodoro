@@ -4,9 +4,9 @@ const indicator = document.querySelector(".indicator");
 const pageTitle = document.querySelector("title");
 // Pomodoro default config
 const timer = {
-  workDuration: 0.05,
-  shortBreak: 0.05,
-  longBreak: 0.05,
+  workDuration: 0.25,
+  shortBreak: 0.25,
+  longBreak: 0.25,
   longBreakInterval: 4,
   mode: "workDuration",
   sessionsStarted: 0,
@@ -95,6 +95,14 @@ const updateClock = () => {
 
   document.querySelector("#js-minutes").textContent = minutes;
   document.querySelector("#js-seconds").textContent = seconds;
+
+  const progress = document.getElementById("js-progress");
+  // Update the progressbar when the counter is running
+  progress.setAttribute(
+    "value",
+    timer[timer.mode] * 60 - timer.timeRemaining.total
+  );
+
   pageTitle.textContent = `${timer.mode} | ${minutes}:${seconds}`;
 };
 
@@ -116,6 +124,11 @@ const switchMode = (mode) => {
   let selectedMode = document.querySelector(`[data-mode="${mode}"]`);
   selectedMode.classList.add("active");
   handleIndicator(selectedMode);
+
+  // Set the progress bar limit
+  document
+    .querySelector("#js-progress")
+    .setAttribute("max", timer.timeRemaining.total);
 
   document.body.style.backgroundImage = `linear-gradient(145deg, var(--${mode}))`;
   updateClock();
