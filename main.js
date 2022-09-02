@@ -2,6 +2,8 @@ const modeButtons = document.querySelector("#js-mode-buttons");
 const mainButton = document.querySelector("#js-btn");
 const indicator = document.querySelector(".indicator");
 const pageTitle = document.querySelector("title");
+const buttonSound = new Audio("button-sound.mp3");
+
 // Pomodoro default config
 const timer = {
   workDuration: 0.25,
@@ -75,6 +77,7 @@ function startTimer() {
       startTimer();
     }
   }, 1000);
+  document.querySelector(`[data-sound="${timer.mode}"]`).play();
 }
 
 // Pause the timer
@@ -164,7 +167,7 @@ modeButtons.addEventListener("click", handleMode);
 
 mainButton.addEventListener("click", (e) => {
   const { action } = e.target.dataset;
-
+  buttonSound.play();
   if (action === "start") {
     startTimer();
   } else if (action === "stop") {
